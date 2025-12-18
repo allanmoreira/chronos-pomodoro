@@ -1,10 +1,15 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+
+import Teste from './App'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+      <Teste/>
+      <div>
+          <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+      </div>
   </StrictMode>,
 )
