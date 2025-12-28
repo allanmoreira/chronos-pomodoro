@@ -1,9 +1,15 @@
 import './styles/theme.css'
 import './styles/global.css'
 import {Heading} from "./components/Heading.tsx";
+import {TimerIcon} from "lucide-react";
 
 export function App() {
     return <>
-        <Heading attr1={123} attr2={'string'}>Hello, world!</Heading>
+        <Heading>
+            Hello, world!
+            <button>
+                <TimerIcon/>
+            </button>
+        </Heading>
     </>
 }
