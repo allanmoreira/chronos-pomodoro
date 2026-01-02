@@ -24,8 +24,8 @@
 }
 
 .logoLink svg {
-    width: 3.4rem;
-    height: 3.4rem;
+    width: var(--icon-size-logo);
+    height: var(--icon-size-logo);
 }
 
 .logoTitle {
