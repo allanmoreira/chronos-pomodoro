@@ -12,7 +12,8 @@ export function Menu() {
 
     const [theme, setTheme] = useState<Themes>('dark');
 
-    function handleThemeChange() {
+    function handleThemeChange(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+        event.preventDefault();
         setTheme(prevTheme => {
             return prevTheme === 'dark' ? 'light' : 'dark'
         });
@@ -43,7 +44,7 @@ export function Menu() {
                title={descricaoConfig}>
                 <SettingsIcon/>
             </a>
-            <a href="javascript:void(0)"
+            <a href="#"
                className={styles.menuLink}
                aria-label={descricaoTema}
                title={descricaoTema}
