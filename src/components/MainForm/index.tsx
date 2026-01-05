@@ -2,15 +2,15 @@ import {DefaultInput} from "../DefaultInput";
 import {Cycles} from "../Cycles";
 import {DefaultButton} from "../DefaultButton";
 import {PlayCircleIcon} from "lucide-react";
-import {useState} from "react";
+import {useRef} from "react";
 
 export function MainForm() {
 
-    const  [taskName, setTaskName] = useState("");
+    const  taskInputName = useRef<HTMLInputElement>(null);
 
     function handleCreateNewTask(event: React.FormEvent) {
         event.preventDefault();
-        console.log(taskName);
+        console.log(taskInputName.current.value);
     }
 
     return (
@@ -22,8 +22,7 @@ export function MainForm() {
                               title="titulo"
                               alt="texto alt"
                               placeholder="Informe o nome da task"
-                              value={taskName}
-                              onChange={e => setTaskName(e.target.value)}
+                              ref={taskInputName}
                 />
             </div>
             <div className='formRow'>
