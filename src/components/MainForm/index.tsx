@@ -3,14 +3,49 @@ import {Cycles} from "../Cycles";
 import {DefaultButton} from "../DefaultButton";
 import {PlayCircleIcon} from "lucide-react";
 import {useRef} from "react";
+import type {TaskModel} from "../../models/TaskModel.ts";
+import {useTaskContext} from "../../contexts/TaskContext";
+import {getNextCycle} from "../../utils/getNextCycles.ts";
 
 export function MainForm() {
 
+    const { state, setState } = useTaskContext();
     const  taskInputName = useRef<HTMLInputElement>(null);
+
+    const nextCycle = getNextCycle(state.currentCycle);
 
     function handleCreateNewTask(event: React.FormEvent) {
         event.preventDefault();
-        console.log(taskInputName.current.value);
+
+        if(taskInputName.current == null)
+            return;
+
+        const taskName = taskInputName.current.value.trim();
+
+        if(!taskName) {
+            alert('Insira o nome da task');
+            return;
+        }
+
+        const newTask:TaskModel = {
+            id: Date.now().toString(),
+            name: taskName,
+            startDate: Date.now(),
+            completeDate: null,
+            interruptDate: null,
+            duration: 1,
+            type: 'workTime'
+        }
+
+        const secondsRemaining = newTask.duration * 60;
+
+        setState((prevState) => ({
+            ...prevState,
+            activeTask: newTask,
+            currentCycle: nextCycle,
+            secondsRemaining,
+            tasks: [...prevState.tasks, newTask]
+        }));
     }
 
     return (
