@@ -1,7 +1,7 @@
 import {DefaultInput} from "../DefaultInput";
 import {Cycles} from "../Cycles";
 import {DefaultButton} from "../DefaultButton";
-import {PlayCircleIcon} from "lucide-react";
+import {PlayCircleIcon, StopCircleIcon} from "lucide-react";
 import {useRef} from "react";
 import type {TaskModel} from "../../models/TaskModel.ts";
 import {useTaskContext} from "../../contexts/TaskContext";
@@ -52,6 +52,15 @@ export function MainForm() {
         }));
     }
 
+    function handleInterruptTask() {
+        setState((prevState) => ({
+            ...prevState,
+            activeTask: null,
+            secondsRemaining: 0,
+            formattedSecondsRemaining: '00:00'
+        }));
+    }
+
     return (
         <form className='form' onSubmit={handleCreateNewTask}>
             <div className='formRow'>
@@ -62,6 +71,7 @@ export function MainForm() {
                               alt="texto alt"
                               placeholder="Informe o nome da task"
                               ref={taskInputName}
+                              disabled={!!state.activeTask}
                 />
             </div>
             <div className='formRow'>
@@ -75,7 +85,10 @@ export function MainForm() {
                 </div>
             )}
             <div className='formRow'>
-                <DefaultButton icon={<PlayCircleIcon/>}/>
+                {!state.activeTask ?
+                    (<DefaultButton icon={<PlayCircleIcon/>} key='btn_create' type='submit' title='Iniciar nova tarefa'/>) :
+                    (<DefaultButton icon={<StopCircleIcon/>} key='btn_stop' type='button' color='red' title='Interromper a tarefa atual' onClick={handleInterruptTask}/>)
+                }
             </div>
         </form>
     );
