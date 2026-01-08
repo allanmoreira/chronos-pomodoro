@@ -22,6 +22,7 @@ export function Cycles() {
                     const cycleType = getCycleType(nextCycle)
                     return (
                         <span className={`${styles.cycleDot} ${styles[cycleType]}`}
+                              key={nextCycle}
                               title={'Indicador de ciclo: ' + cycleDescriptionMap[cycleType]}
                         ></span>
                     )
